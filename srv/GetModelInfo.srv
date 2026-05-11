@@ -1,0 +1,10 @@
+# Request model information from a running inference node
+---
+string backend
+string model_path
+string device
+string[] input_names
+string[] output_names
+bool fp16
+bool int8
+string extra_json

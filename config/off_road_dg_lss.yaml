@@ -1,0 +1,33 @@
+# Config for off-road-dg-lss MinkUNetWithAuxDecoder
+# Trained with train-amiad-goose-paper.yaml (cr=1.0, use_spatial_context=true)
+# Checkpoint: best_model_1.pth
+
+model:
+  path: /app/best_model_1.pth      # remplace par le chemin absolu si hors Docker
+  backend: torchsparse
+  input_names: [points]
+  output_names: [logits]
+  metadata:
+    project_root: /app              # chemin vers off-road-dg-lss (src/ doit être là)
+    num_classes: 64
+    num_auxiliary_classes: 10
+    voxel_size: 0.1
+    cr: 0.5
+    use_spatial_context: true
+    spatial_context_out_channels: 32
+    cylindrical_coordinates: false
+
+device:
+  type: cuda:0
+
+optimization:
+  warmup_iterations: 0
+  batch_size: 1
+  max_batch_size: 1
+
+ros:
+  input_topic: /os_cloud_node/points   # adapte au topic de ton bag
+  output_topic: /segmentation/points
+  queue_size: 1
+  publish_latency: true
+  latency_topic: ~/latency_ms

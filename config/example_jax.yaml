@@ -1,0 +1,30 @@
+# Example config: JAX/Flax model inference
+
+model:
+  path: /path/to/checkpoint.pkl    # cloudpickle'd JAX function or orbax checkpoint dir
+  backend: jax
+  input_names: [obs]
+  output_names: [action]
+  input_shapes:
+    obs: [48]
+  output_shapes:
+    action: [12]
+  metadata:
+    # For orbax checkpoints: importable path to the apply function
+    apply_fn_path: my_package.model.policy.apply
+
+device:
+  type: gpu                         # cpu or gpu
+
+optimization:
+  fp16: false
+  batch_size: 1
+  max_batch_size: 1
+  warmup_iterations: 5              # triggers JIT compilation
+
+ros:
+  input_topic: /robot/observation
+  output_topic: /robot/action
+  queue_size: 1
+  publish_latency: true
+  latency_topic: ~/latency_ms

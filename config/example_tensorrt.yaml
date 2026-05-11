@@ -1,0 +1,32 @@
+# Example config: TensorRT engine — lowest latency on NVIDIA Jetson / desktop GPU
+# First convert your ONNX model to a TRT engine, OR pass the .onnx directly
+# and the backend will build + cache the engine automatically.
+
+model:
+  path: /path/to/policy.onnx       # or /path/to/policy.trt
+  backend: tensorrt
+  input_names: [obs]
+  output_names: [action]
+  input_shapes:
+    obs: [48]
+  output_shapes:
+    action: [12]
+
+device:
+  type: cuda:0
+
+optimization:
+  fp16: true                        # FP16 gives 2-4x latency reduction vs FP32
+  int8: false                       # INT8 requires calibration data
+  batch_size: 1
+  max_batch_size: 4
+  dynamic_batching: false
+  warmup_iterations: 5
+  use_pinned_memory: true
+
+ros:
+  input_topic: /robot/observation
+  output_topic: /robot/action
+  queue_size: 1
+  publish_latency: true
+  latency_topic: ~/latency_ms

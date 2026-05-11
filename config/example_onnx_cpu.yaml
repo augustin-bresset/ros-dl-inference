@@ -1,0 +1,38 @@
+# Example config: ONNX Runtime on CPU — portable, no GPU required
+# Works on Raspberry Pi, Jetson Nano, x86 without CUDA
+
+model:
+  path: /path/to/policy.onnx
+  backend: onnx
+  input_names: [obs]
+  output_names: [action]
+  input_shapes:
+    obs: [48]
+  output_shapes:
+    action: [12]
+
+device:
+  type: cpu
+
+optimization:
+  fp16: false
+  batch_size: 1
+  max_batch_size: 1
+  warmup_iterations: 3
+  num_threads: 4                    # match your CPU core count
+
+preprocessing:
+  enabled: false
+
+postprocessing:
+  enabled: true
+  steps:
+    - type: clip
+      low: -1.0
+      high: 1.0
+
+ros:
+  input_topic: /robot/observation
+  output_topic: /robot/action
+  queue_size: 1
+  publish_latency: false

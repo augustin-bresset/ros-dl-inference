@@ -1,0 +1,23 @@
+<!--
+  ROS 1 launch file for the inference node.
+
+  Usage:
+    roslaunch ros_rl_inference inference.launch config:=/path/to/config.yaml
+-->
+<launch>
+  <arg name="config"  default="$(find ros_rl_inference)/config/example_pytorch.yaml"/>
+  <arg name="log_level" default="info"/>
+
+  <node
+    pkg="ros_rl_inference"
+    type="inference_node_ros1"
+    name="rl_inference"
+    output="screen"
+    respawn="true"
+    respawn_delay="2"
+  >
+    <param name="config" value="$(arg config)"/>
+    <!-- Force real-time scheduling if running as root -->
+    <!-- <param name="nice" value="-20"/> -->
+  </node>
+</launch>

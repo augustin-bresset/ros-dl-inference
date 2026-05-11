@@ -1,0 +1,3 @@
+[console_scripts]
+rl_inference_ros1 = ros_rl_inference.nodes.inference_node_ros1:main
+rl_inference_ros2 = ros_rl_inference.nodes.inference_node_ros2:main

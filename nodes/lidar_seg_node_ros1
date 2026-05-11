@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+"""ROS 1 LiDAR segmentation node entrypoint (torchsparse backend)."""
+
+import argparse
+import sys
+
+from ros_rl_inference.core.config import InferenceConfig
+from ros_rl_inference.ros1.pointcloud_node import SegmentationNodeROS1
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", required=True, help="Path to YAML config")
+    args, _ = parser.parse_known_args()
+
+    try:
+        config = InferenceConfig.from_yaml(args.config)
+        config.validate()
+    except Exception as e:
+        print(f"[ERROR] {e}", file=sys.stderr)
+        sys.exit(1)
+
+    SegmentationNodeROS1(config).run()
+
+
+if __name__ == "__main__":
+    main()

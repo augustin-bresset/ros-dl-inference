@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: ros-rl-inference
+Version: 0.1.0
+Summary: Optimized model inference for ROS 1 and ROS 2
+Author: Augustin Bresset
+Author-email: augustin.bresset@gmail.com
+License: MIT
+Requires-Python: >=3.8
+Provides-Extra: dev
+Provides-Extra: jax
+Provides-Extra: onnx
+Provides-Extra: pytorch
+Provides-Extra: tensorrt

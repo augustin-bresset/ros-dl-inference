@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+"""ROS 2 inference node entrypoint."""
+
+import argparse
+import sys
+
+from ros_rl_inference.core.config import InferenceConfig
+from ros_rl_inference.ros2.node import main as ros2_main
+
+
+def main():
+    parser = argparse.ArgumentParser(description="ROS 2 RL inference node")
+    parser.add_argument("--config", required=True, help="Path to YAML config file")
+    args, _ = parser.parse_known_args()
+
+    try:
+        config = InferenceConfig.from_yaml(args.config)
+        config.validate()
+    except Exception as e:
+        print(f"[ERROR] Failed to load config '{args.config}': {e}", file=sys.stderr)
+        sys.exit(1)
+
+    ros2_main(config)
+
+
+if __name__ == "__main__":
+    main()

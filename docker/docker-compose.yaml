@@ -1,0 +1,43 @@
+services:
+
+  # ── Inference offline sur rosbag (pas de ROS requis) ───────────────────
+  rosbag-inference:
+    build:
+      context: ../..          # racine de ~/dev/
+      dockerfile: ros-rl-inference/docker/Dockerfile
+    image: ros_rl_inference:latest
+    container_name: ros_rl_inference
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - CUDA_VISIBLE_DEVICES=0
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+    shm_size: "8gb"
+
+    volumes:
+      # Code (montés en live pour éviter de rebuilder à chaque modif)
+      - ../../ros-rl-inference:/app/ros-rl-inference
+      - ../../off-road-dg-lss:/app/off-road-dg-lss
+      # Données : monte le dossier contenant tes .bag ici
+      - /data:/data
+
+    working_dir: /app
+
+    # Commande par défaut — override avec `docker compose run rosbag-inference ...`
+    command: >
+      python3 /app/ros-rl-inference/scripts/test_rosbag.py
+        --bag    /data/recording.bag
+        --config /app/ros-rl-inference/config/off_road_dg_lss.yaml
+        --out    /data/recording_seg.bag
+
+    stdin_open: true
+    tty: true
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

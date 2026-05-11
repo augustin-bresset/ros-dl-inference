@@ -1,0 +1,50 @@
+# Example config: PyTorch TorchScript model on CUDA
+# Run with: rosrun ros_rl_inference inference_node_ros1 --config $(find . -name example_pytorch.yaml)
+
+model:
+  path: /path/to/model.pt          # TorchScript (.pt) file
+  backend: pytorch
+  input_names: [obs]
+  output_names: [action]
+  input_shapes:
+    obs: [48]                       # observation dimension
+  output_shapes:
+    action: [12]                    # action dimension
+
+device:
+  type: cuda:0
+  memory_fraction: 0.5             # limit GPU memory to 50%
+
+optimization:
+  fp16: true                        # half precision — 2x faster on modern GPUs
+  batch_size: 1
+  max_batch_size: 1
+  dynamic_batching: false
+  warmup_iterations: 10
+  use_cuda_graphs: false           # set true for fixed-shape models
+  use_pinned_memory: true
+  num_threads: 1
+
+preprocessing:
+  enabled: true
+  steps:
+    - type: clip
+      low: -10.0
+      high: 10.0
+    - type: cast
+      dtype: float32
+
+postprocessing:
+  enabled: true
+  steps:
+    - type: clip
+      low: -1.0
+      high: 1.0
+
+ros:
+  input_topic: /robot/observation
+  output_topic: /robot/action
+  queue_size: 1
+  use_shared_memory: false
+  publish_latency: true
+  latency_topic: ~/latency_ms

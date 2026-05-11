@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>ros_rl_inference</name>
+  <version>0.1.0</version>
+  <description>
+    Optimized model inference node for ROS 1 and ROS 2.
+    Supports PyTorch, TensorRT, ONNX Runtime, and JAX backends.
+    Designed for real-time robot control with minimal latency.
+  </description>
+
+  <maintainer email="augustin.bresset@gmail.com">Augustin Bresset</maintainer>
+  <license>MIT</license>
+
+  <!-- Build tool: works with both catkin (ROS1) and ament_cmake (ROS2) -->
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
+  <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake_python</buildtool_depend>
+
+  <!-- ROS 1 dependencies -->
+  <depend condition="$ROS_VERSION == 1">rospy</depend>
+  <depend condition="$ROS_VERSION == 1">std_msgs</depend>
+  <depend condition="$ROS_VERSION == 1">message_generation</depend>
+
+  <!-- ROS 2 dependencies -->
+  <depend condition="$ROS_VERSION == 2">rclpy</depend>
+  <depend condition="$ROS_VERSION == 2">std_msgs</depend>
+  <depend condition="$ROS_VERSION == 2">rosidl_default_generators</depend>
+
+  <!-- Common Python dependencies (install via pip) -->
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+
+  <export>
+    <build_type condition="$ROS_VERSION == 1">catkin</build_type>
+    <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
+  </export>
+</package>
