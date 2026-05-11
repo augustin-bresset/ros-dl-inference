@@ -16,10 +16,10 @@ services:
     shm_size: "8gb"
 
     volumes:
-      # Code (montés en live pour éviter de rebuilder à chaque modif)
+      
       - ../../ros-rl-inference:/app/ros-rl-inference
       - ../../off-road-dg-lss:/app/off-road-dg-lss
-      # Données : monte le dossier contenant tes .bag ici
+      
       - /data:/data
 
     working_dir: /app
