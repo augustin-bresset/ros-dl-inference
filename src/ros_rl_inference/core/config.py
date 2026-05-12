@@ -164,7 +164,7 @@ class InferenceConfig:
     def validate(self) -> None:
         if not self.model.path:
             raise ValueError("model.path must be set")
-        if self.model.backend not in ("pytorch", "jax", "tensorrt", "onnx"):
+        if self.model.backend not in ("pytorch", "pytorch_source", "jax", "tensorrt", "onnx", "torchsparse"):
             raise ValueError(f"Unknown backend: {self.model.backend}")
         if self.optimization.fp16 and self.optimization.int8:
             raise ValueError("fp16 and int8 cannot both be enabled")

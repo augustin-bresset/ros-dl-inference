@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Dict, Type
-
 from ..core.base_backend import BaseBackend
 from ..core.config import InferenceConfig
 
@@ -11,8 +9,14 @@ from ..core.config import InferenceConfig
 def get_backend(config: InferenceConfig) -> BaseBackend:
     name = config.model.backend
     if name == "pytorch":
-        from .pytorch_backend import PyTorchBackend
-        return PyTorchBackend(config)
+        from .pytorch_backend import PyTorchScriptBackend
+        return PyTorchScriptBackend(config)
+    elif name == "pytorch_source":
+        from .pytorch_backend import PyTorchSourceBackend
+        return PyTorchSourceBackend(config)
+    elif name == "torchsparse":
+        from .torchsparse_backend import TorchSparseBackend
+        return TorchSparseBackend(config)
     elif name == "tensorrt":
         from .tensorrt_backend import TensorRTBackend
         return TensorRTBackend(config)
@@ -22,11 +26,8 @@ def get_backend(config: InferenceConfig) -> BaseBackend:
     elif name == "jax":
         from .jax_backend import JAXBackend
         return JAXBackend(config)
-    elif name == "torchsparse":
-        from .torchsparse_backend import TorchSparseBackend
-        return TorchSparseBackend(config)
     else:
         raise ValueError(
             f"Unknown backend: '{name}'. "
-            f"Supported: pytorch, tensorrt, onnx, jax, torchsparse"
+            f"Supported: pytorch, pytorch_source, torchsparse, tensorrt, onnx, jax"
         )

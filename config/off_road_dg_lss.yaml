@@ -4,18 +4,27 @@
 
 model:
   path: /app/best_model_1.pth      # remplace par le chemin absolu si hors Docker
-  backend: torchsparse
+  backend: torchsparse    # PyTorchSourceBackend + voxelisation sparse
   input_names: [points]
   output_names: [logits]
   metadata:
+    # SourceBackend — import dynamique
+    module: src.models.torchsparse_sep.MinkUNetWithAuxDecoder
     project_root: /app              # chemin vers off-road-dg-lss (src/ doit être là)
-    num_classes: 64
-    num_auxiliary_classes: 10
+
+    # Arguments passés verbatim au constructeur
+    constructor_kwargs:
+      in_features: 4
+      num_classes: 64
+      num_auxiliary_classes: 10
+      voxel_size: 0.1
+      cylindrical_coordinates: false
+      cr: 1.0
+      use_spatial_context: true
+      spatial_context_out_channels: 32
+
+    # TorchSparseBackend — voxelisation
     voxel_size: 0.1
-    cr: 0.5
-    use_spatial_context: true
-    spatial_context_out_channels: 32
-    cylindrical_coordinates: false
 
 device:
   type: cuda:0
