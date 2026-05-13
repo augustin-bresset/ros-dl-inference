@@ -142,8 +142,8 @@ def main():
 
     import torch
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-    from ros_rl_inference.core.config import InferenceConfig
-    from ros_rl_inference.backends.torchsparse_backend import TorchSparseBackend
+    from ros_dl_inference.core.config import InferenceConfig
+    from ros_dl_inference.backends.torchsparse_backend import TorchSparseBackend
 
     # ── load config ──
     cfg = InferenceConfig.from_yaml(args.config)

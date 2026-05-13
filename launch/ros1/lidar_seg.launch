@@ -2,19 +2,19 @@
   ROS 1 launch file for LiDAR segmentation (torchsparse backend).
 
   Usage avec un bag:
-    roslaunch ros_rl_inference lidar_seg.launch \
+    roslaunch ros_dl_inference lidar_seg.launch \
         config:=/app/ros-rl-inference/config/off_road_dg_lss.yaml \
         bag:=/data/recording.bag \
         labels_cfg:=/app/off-road-dg-lss/resources/goose_cfg.yaml
 -->
 <launch>
-  <arg name="config"     default="$(find ros_rl_inference)/config/off_road_dg_lss.yaml"/>
+  <arg name="config"     default="$(find ros_dl_inference)/config/off_road_dg_lss.yaml"/>
   <arg name="bag"        default=""/>
-  <arg name="labels_cfg" default="$(find ros_rl_inference)/../off-road-dg-lss/resources/goose_cfg.yaml"/>
+  <arg name="labels_cfg" default="$(find ros_dl_inference)/../off-road-dg-lss/resources/goose_cfg.yaml"/>
   <arg name="rate"       default="1.0"/>
 
   <!-- Inference node -->
-  <node pkg="ros_rl_inference"
+  <node pkg="ros_dl_inference"
         type="lidar_seg_node_ros1"
         name="lidar_segmentation"
         output="screen"

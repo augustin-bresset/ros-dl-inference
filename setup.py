@@ -3,7 +3,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="ros_rl_inference",
+    name="ros_dl_inference",
     version="0.1.0",
     description="Optimized model inference for ROS 1 and ROS 2",
     author="Augustin Bresset",
@@ -28,8 +28,8 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "rl_inference_ros1=ros_rl_inference.nodes.inference_node_ros1:main",
-            "rl_inference_ros2=ros_rl_inference.nodes.inference_node_ros2:main",
+            "rl_inference_ros1=ros_dl_inference.nodes.inference_node_ros1:main",
+            "rl_inference_ros2=ros_dl_inference.nodes.inference_node_ros2:main",
         ]
     },
 )

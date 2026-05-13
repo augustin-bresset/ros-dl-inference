@@ -1,4 +1,4 @@
-"""Configuration loading and validation for ros_rl_inference."""
+"""Configuration loading and validation for ros_dl_inference."""
 
 from __future__ import annotations
 
@@ -50,10 +50,12 @@ class ROSConfig:
     info_service: str = "~/get_model_info"
     queue_size: int = 1
     use_shared_memory: bool = False
-    shared_memory_key: str = "ros_rl_inference"
+    shared_memory_key: str = "ros_dl_inference"
     latched: bool = False
     publish_latency: bool = False
     latency_topic: str = "~/latency"
+    input_type: str = "float32_array"   # float32_array | image
+    output_type: str = "float32_array"  # float32_array | image
 
 
 @dataclass
@@ -146,10 +148,12 @@ class InferenceConfig:
             info_service=ros_raw.get("info_service", "~/get_model_info"),
             queue_size=ros_raw.get("queue_size", 1),
             use_shared_memory=ros_raw.get("use_shared_memory", False),
-            shared_memory_key=ros_raw.get("shared_memory_key", "ros_rl_inference"),
+            shared_memory_key=ros_raw.get("shared_memory_key", "ros_dl_inference"),
             latched=ros_raw.get("latched", False),
             publish_latency=ros_raw.get("publish_latency", False),
             latency_topic=ros_raw.get("latency_topic", "~/latency"),
+            input_type=ros_raw.get("input_type", "float32_array"),
+            output_type=ros_raw.get("output_type", "float32_array"),
         )
 
         return cls(

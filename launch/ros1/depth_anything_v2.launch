@@ -1,0 +1,23 @@
+<launch>
+  <arg name="config" default="$(find ros_dl_inference)/config/depth_anything_v2.yaml"/>
+  <arg name="bag"    default=""/>
+  <arg name="rate"   default="1.0"/>
+
+  <node
+    pkg="ros_dl_inference"
+    type="inference_node_ros1"
+    name="depth_anything_v2"
+    output="screen"
+    respawn="true"
+    respawn_delay="2"
+  >
+    <param name="config" value="$(arg config)"/>
+  </node>
+
+  <group if="$(eval bag != '')">
+    <node pkg="rosbag" type="play" name="rosbag_play"
+          args="--clock -r $(arg rate) $(arg bag)"
+          output="screen"/>
+  </group>
+
+</launch>

@@ -4,8 +4,8 @@
 import argparse
 import sys
 
-from ros_rl_inference.core.config import InferenceConfig
-from ros_rl_inference.ros2.node import main as ros2_main
+from ros_dl_inference.core.config import InferenceConfig
+from ros_dl_inference.ros2.node import main as ros2_main
 
 
 def main():

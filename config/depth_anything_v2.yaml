@@ -1,0 +1,37 @@
+model:
+  path: ../models/Depth-Anything-V2/weights/depth_anything_v2_vits.pth
+  backend: pytorch_source
+  input_names: [image]
+  output_names: [depth]
+  input_shapes:
+    image: [1, 3, 518, 518]
+  output_shapes:
+    depth: [1, 518, 518]
+  metadata:
+    module: depth_anything_v2.dpt.DepthAnythingV2
+    project_root: ../models/Depth-Anything-V2/
+    constructor_kwargs:
+      encoder: vits
+      features: 64
+      out_channels: [48, 96, 192, 384]
+
+device:
+  type: cuda:0
+  memory_fraction: 0.5
+
+optimization:
+  fp16: false
+  batch_size: 1
+  max_batch_size: 1
+  warmup_iterations: 5
+  use_pinned_memory: true
+  num_threads: 1
+
+ros:
+  input_topic: /cam2/rgb
+  output_topic: /depth_anything/depth
+  input_type: image
+  output_type: image
+  queue_size: 1
+  publish_latency: true
+  latency_topic: ~/latency_ms

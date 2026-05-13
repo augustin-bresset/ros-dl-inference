@@ -2,7 +2,7 @@
 ROS 2 launch file for the inference node.
 
 Usage:
-  ros2 launch ros_rl_inference inference.launch.py config:=/path/to/config.yaml
+  ros2 launch ros_dl_inference inference.launch.py config:=/path/to/config.yaml
 """
 
 import os
@@ -16,7 +16,7 @@ from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
-    pkg_share = FindPackageShare("ros_rl_inference")
+    pkg_share = FindPackageShare("ros_dl_inference")
 
     default_config = PathJoinSubstitution(
         [pkg_share, "example_pytorch.yaml"]
@@ -29,7 +29,7 @@ def generate_launch_description():
     )
 
     inference_node = Node(
-        package="ros_rl_inference",
+        package="ros_dl_inference",
         executable="inference_node_ros2",
         name="rl_inference",
         output="screen",

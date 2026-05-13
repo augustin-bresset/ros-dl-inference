@@ -3,7 +3,7 @@
 import numpy as np
 import pytest
 
-from ros_rl_inference.core.pipeline import ProcessingPipeline, register_step
+from ros_dl_inference.core.pipeline import ProcessingPipeline, register_step
 
 
 def test_normalize():

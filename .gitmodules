@@ -1,0 +1,6 @@
+[submodule "models/off-road-dg-lss"]
+	path = models/off-road-dg-lss
+	url = git@gitlab.ensta.fr:bresset/off-road-dg-lss.git
+[submodule "models/Depth-Anything-V2"]
+	path = models/Depth-Anything-V2
+	url = git@github.com:DepthAnything/Depth-Anything-V2.git

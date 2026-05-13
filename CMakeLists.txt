@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(ros_rl_inference)
+project(ros_dl_inference)
 
 # -----------------------------------------------------------------------
 # Detect ROS version
@@ -11,7 +11,7 @@ else()
   set(ROS_VERSION 2)
 endif()
 
-message(STATUS "Building ros_rl_inference for ROS ${ROS_VERSION}")
+message(STATUS "Building ros_dl_inference for ROS ${ROS_VERSION}")
 
 # -----------------------------------------------------------------------
 # ROS 1 (catkin)
@@ -25,13 +25,13 @@ if(ROS_VERSION EQUAL 1)
 
   add_message_files(
     FILES
-      msg/InferenceInput.msg
-      msg/InferenceOutput.msg
+      InferenceInput.msg
+      InferenceOutput.msg
   )
 
   add_service_files(
     FILES
-      srv/GetModelInfo.srv
+      GetModelInfo.srv
   )
 
   generate_messages(
@@ -50,8 +50,8 @@ if(ROS_VERSION EQUAL 1)
   )
 
   install(
-    DIRECTORY src/ros_rl_inference/
-    DESTINATION ${CATKIN_PACKAGE_PYTHON_DESTINATION}/ros_rl_inference
+    DIRECTORY src/ros_dl_inference/
+    DESTINATION ${CATKIN_PACKAGE_PYTHON_DESTINATION}/ros_dl_inference
     FILES_MATCHING PATTERN "*.py"
   )
 
@@ -77,8 +77,8 @@ elseif(ROS_VERSION EQUAL 2)
     DEPENDENCIES std_msgs
   )
 
-  ament_python_install_package(ros_rl_inference
-    PACKAGE_DIR src/ros_rl_inference
+  ament_python_install_package(ros_dl_inference
+    PACKAGE_DIR src/ros_dl_inference
   )
 
   install(

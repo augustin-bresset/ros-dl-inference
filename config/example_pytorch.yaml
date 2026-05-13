@@ -1,5 +1,5 @@
 # Example config: PyTorch TorchScript model on CUDA
-# Run with: rosrun ros_rl_inference inference_node_ros1 --config $(find . -name example_pytorch.yaml)
+# Run with: rosrun ros_dl_inference inference_node_ros1 --config $(find . -name example_pytorch.yaml)
 
 model:
   path: /path/to/model.pt          # TorchScript (.pt) file

@@ -5,7 +5,7 @@ import threading
 import numpy as np
 import pytest
 
-from ros_rl_inference.utils.memory_pool import BufferPool
+from ros_dl_inference.utils.memory_pool import BufferPool
 
 
 def test_acquire_and_release():

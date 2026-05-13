@@ -7,9 +7,9 @@ from typing import Dict
 import numpy as np
 import pytest
 
-from ros_rl_inference.core.base_backend import BaseBackend, ModelInfo
-from ros_rl_inference.core.config import InferenceConfig
-from ros_rl_inference.core.engine import InferenceEngine
+from ros_dl_inference.core.base_backend import BaseBackend, ModelInfo
+from ros_dl_inference.core.config import InferenceConfig
+from ros_dl_inference.core.engine import InferenceEngine
 
 
 class MockBackend(BaseBackend):

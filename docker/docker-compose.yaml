@@ -5,8 +5,8 @@ services:
     build:
       context: ../..          # racine de ~/dev/
       dockerfile: ros-rl-inference/docker/Dockerfile
-    image: ros_rl_inference:latest
-    container_name: ros_rl_inference
+    image: ros_dl_inference:latest
+    container_name: ros_dl_inference
 
     environment:
       - NVIDIA_VISIBLE_DEVICES=all

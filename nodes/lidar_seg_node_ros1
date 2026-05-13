@@ -4,8 +4,8 @@
 import argparse
 import sys
 
-from ros_rl_inference.core.config import InferenceConfig
-from ros_rl_inference.ros1.pointcloud_node import SegmentationNodeROS1
+from ros_dl_inference.core.config import InferenceConfig
+from ros_dl_inference.ros1.pointcloud_node import SegmentationNodeROS1
 
 
 def main():

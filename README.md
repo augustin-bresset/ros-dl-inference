@@ -1,4 +1,4 @@
-# ros_rl_inference
+# ros_dl_inference
 
 Optimized model inference package for **ROS 1** and **ROS 2**, designed for real-time robot control.
 
@@ -15,8 +15,8 @@ Optimized model inference package for **ROS 1** and **ROS 2**, designed for real
 ## Architecture
 
 ```
-ros_rl_inference/
-├── src/ros_rl_inference/
+ros_dl_inference/
+├── src/ros_dl_inference/
 │   ├── core/
 │   │   ├── config.py          # YAML config loading + validation
 │   │   ├── base_backend.py    # Abstract backend interface
@@ -59,31 +59,31 @@ pip install -e ".[tensorrt]"          # TensorRT + pycuda
 **ROS 1 (catkin):**
 ```bash
 cd ~/catkin_ws/src
-ln -s /path/to/ros_rl_inference .
+ln -s /path/to/ros_dl_inference .
 cd ~/catkin_ws && catkin_make
 ```
 
 **ROS 2 (colcon):**
 ```bash
 cd ~/ros2_ws/src
-ln -s /path/to/ros_rl_inference .
-cd ~/ros2_ws && colcon build --packages-select ros_rl_inference
+ln -s /path/to/ros_dl_inference .
+cd ~/ros2_ws && colcon build --packages-select ros_dl_inference
 ```
 
 ### 3. Run
 
 **ROS 1:**
 ```bash
-rosrun ros_rl_inference inference_node_ros1 --config /path/to/config.yaml
+rosrun ros_dl_inference inference_node_ros1 --config /path/to/config.yaml
 # or
-roslaunch ros_rl_inference inference.launch config:=/path/to/config.yaml
+roslaunch ros_dl_inference inference.launch config:=/path/to/config.yaml
 ```
 
 **ROS 2:**
 ```bash
-ros2 run ros_rl_inference inference_node_ros2 --config /path/to/config.yaml
+ros2 run ros_dl_inference inference_node_ros2 --config /path/to/config.yaml
 # or
-ros2 launch ros_rl_inference inference.launch.py config:=/path/to/config.yaml
+ros2 launch ros_dl_inference inference.launch.py config:=/path/to/config.yaml
 ```
 
 ## Configuration
@@ -144,8 +144,8 @@ See `config/` for full examples per backend.
 Subclass `BaseBackend` and call `get_backend` with your registered name:
 
 ```python
-from ros_rl_inference.core.base_backend import BaseBackend, ModelInfo
-from ros_rl_inference.backends import get_backend
+from ros_dl_inference.core.base_backend import BaseBackend, ModelInfo
+from ros_dl_inference.backends import get_backend
 
 class MyBackend(BaseBackend):
     def load(self): ...
@@ -158,7 +158,7 @@ class MyBackend(BaseBackend):
 ## Custom Processing Step
 
 ```python
-from ros_rl_inference.core.pipeline import register_step
+from ros_dl_inference.core.pipeline import register_step
 import numpy as np
 
 def my_transform(arr: np.ndarray, alpha: float) -> np.ndarray:

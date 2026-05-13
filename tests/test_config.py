@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from ros_rl_inference.core.config import InferenceConfig
+from ros_dl_inference.core.config import InferenceConfig
 
 
 def write_yaml(tmp_path: Path, data: dict) -> Path:

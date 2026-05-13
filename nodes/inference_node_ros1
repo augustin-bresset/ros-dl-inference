@@ -6,8 +6,8 @@ import sys
 
 import rospy
 
-from ros_rl_inference.core.config import InferenceConfig
-from ros_rl_inference.ros1.node import InferenceNodeROS1
+from ros_dl_inference.core.config import InferenceConfig
+from ros_dl_inference.ros1.node import InferenceNodeROS1
 
 
 def main():
