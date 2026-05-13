@@ -23,6 +23,8 @@ if(ROS_VERSION EQUAL 1)
     message_generation
   )
 
+  catkin_python_setup()
+
   add_message_files(
     FILES
       InferenceInput.msg
@@ -51,7 +53,7 @@ if(ROS_VERSION EQUAL 1)
 
   install(
     DIRECTORY src/ros_dl_inference/
-    DESTINATION ${CATKIN_PACKAGE_PYTHON_DESTINATION}/ros_dl_inference
+    DESTINATION ${CATKIN_GLOBAL_PYTHON_DESTINATION}/ros_dl_inference
     FILES_MATCHING PATTERN "*.py"
   )
 

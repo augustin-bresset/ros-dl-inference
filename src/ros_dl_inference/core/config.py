@@ -80,14 +80,24 @@ class InferenceConfig:
 
     @classmethod
     def from_yaml(cls, path: Union[str, Path]) -> "InferenceConfig":
-        path = Path(path)
+        path = Path(path).resolve()
         if not path.exists():
             raise FileNotFoundError(f"Config file not found: {path}")
 
-        with open(path) as f:
-            raw = yaml.safe_load(f)
+        config_dir = path.parent
 
-        return cls._from_dict(raw or {})
+        with open(path) as f:
+            raw = yaml.safe_load(f) or {}
+
+        # Resolve relative paths in model section against the config file location
+        model_raw = raw.get("model", {})
+        if model_raw.get("path") and not os.path.isabs(model_raw["path"]):
+            model_raw["path"] = str((config_dir / model_raw["path"]).resolve())
+        meta = model_raw.get("metadata", {})
+        if meta.get("project_root") and not os.path.isabs(meta["project_root"]):
+            meta["project_root"] = str((config_dir / meta["project_root"]).resolve())
+
+        return cls._from_dict(raw)
 
     @classmethod
     def _from_dict(cls, d: Dict[str, Any]) -> "InferenceConfig":

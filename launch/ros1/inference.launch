@@ -12,12 +12,9 @@
     pkg="ros_dl_inference"
     type="inference_node_ros1"
     name="rl_inference"
+    args="--config $(arg config)"
     output="screen"
     respawn="true"
     respawn_delay="2"
-  >
-    <param name="config" value="$(arg config)"/>
-    <!-- Force real-time scheduling if running as root -->
-    <!-- <param name="nice" value="-20"/> -->
-  </node>
+  />
 </launch>

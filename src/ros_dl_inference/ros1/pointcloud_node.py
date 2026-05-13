@@ -17,8 +17,8 @@ import yaml
 from sensor_msgs.msg import PointCloud2, PointField
 from std_msgs.msg import Header
 
-from ...backends.torchsparse_backend import TorchSparseBackend
-from ...core.config import InferenceConfig
+from ..backends.torchsparse_backend import TorchSparseBackend
+from ..core.config import InferenceConfig
 
 
 # ── PointCloud2 conversion ─────────────────────────────────────────────────

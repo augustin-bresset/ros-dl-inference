@@ -9,9 +9,9 @@ import numpy as np
 import rospy
 from std_msgs.msg import Float32MultiArray, MultiArrayDimension, MultiArrayLayout
 
-from ...backends import get_backend
-from ...core.config import InferenceConfig
-from ...core.engine import InferenceEngine
+from ..backends import get_backend
+from ..core.config import InferenceConfig
+from ..core.engine import InferenceEngine
 
 _IMAGENET_MEAN = np.array([0.485, 0.456, 0.406], dtype=np.float32)
 _IMAGENET_STD  = np.array([0.229, 0.224, 0.225], dtype=np.float32)
@@ -143,8 +143,8 @@ class InferenceNodeROS1:
     def _run_image_mode(self, cfg: InferenceConfig, latency_pub) -> None:
         from sensor_msgs.msg import Image
 
-        input_shape = cfg.model.input_shapes.get(cfg.model.input_names[0], [1, 3, 518, 518])
-        _, _, target_h, target_w = input_shape
+        input_shape = cfg.model.input_shapes.get(cfg.model.input_names[0], [3, 518, 518])
+        _, target_h, target_w = input_shape
 
         if cfg.ros.output_type == "image":
             pub = rospy.Publisher(

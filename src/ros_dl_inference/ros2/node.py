@@ -16,9 +16,9 @@ from rclpy.qos import (
 )
 from std_msgs.msg import Float32, Float32MultiArray, MultiArrayDimension, MultiArrayLayout
 
-from ...backends import get_backend
-from ...core.config import InferenceConfig
-from ...core.engine import InferenceEngine
+from ..backends import get_backend
+from ..core.config import InferenceConfig
+from ..core.engine import InferenceEngine
 
 
 def _best_effort_qos(depth: int = 1) -> QoSProfile:
